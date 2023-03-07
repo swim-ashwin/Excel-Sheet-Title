@@ -1,10 +1,17 @@
 public class median{
 
     public static void main(){
-
+        
     }
 
     public int[] merge(int[] arr1, int[] arr2){
+        if (arr1 == null || arr1.length == 0) {
+            return arr2;
+        }
+        if (arr2 == null || arr2.length == 0) {
+            return arr1;
+        }
+    
         int aLength = arr1.length;
         int bLength = arr2.length;
         int totalLength = aLength + bLength;
