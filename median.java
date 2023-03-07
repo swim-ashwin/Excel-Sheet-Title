@@ -1,10 +1,16 @@
 public class median{
 
-    public static void main(){
-        
+    public static void main(String[] args){
+    int[] arr1 = {1, 3, 5};
+    int[] arr2 = {2, 4, 6, 8};
+    int[] mergedArray = merge(arr1, arr2);
+
+    for (int i = 0; i < mergedArray.length; i++) {
+        System.out.print(mergedArray[i] + " ");
+    }
     }
 
-    public int[] merge(int[] arr1, int[] arr2){
+    public static int[] merge(int[] arr1, int[] arr2){
         if (arr1 == null || arr1.length == 0) {
             return arr2;
         }
