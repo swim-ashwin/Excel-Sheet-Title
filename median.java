@@ -1,20 +1,18 @@
 public class median{
 
     public static void main(String[] args){
-    // int[] arr1 = {1, 3, 5};
-    // int[] arr2 = {2, 4, 6, 8};
-    // int[] mergedArray = merge(arr1, arr2);
+         int[] arr1 = {};
+        int[] arr2 = {};
+        int[] mergedArray = merge(arr1, arr2);
 
-    // for (int i = 0; i < mergedArray.length; i++) {
-    //     System.out.print(mergedArray[i] + " ");
-    // }
+        for (int i = 0; i < mergedArray.length; i++) {
+            System.out.print(mergedArray[i] + " ");
+        }
 
-    int[] test = {4, 7, 11, 2, 8};
-    int[] result = sort(test);
-
-    for(int i = 0; i < result.length; i++){
-        System.out.print(result[i] + " ");
-    }
+        int[] result = sort(mergedArray);
+        double median = findMedian(result);
+        System.out.print("\n" + "Median is: ");
+        System.out.println(median);
     
     }
 
@@ -54,8 +52,13 @@ public class median{
         return mergedArray;
     }
 
-    public static int findMedian(int[] rearranged){
-        return 0;
+    public static double findMedian(int[] rearranged){
+        int n = rearranged.length;
+    if (n % 2 == 0) {
+        return (rearranged[n/2 - 1] + rearranged[n/2]) / 2.0;
+    } else {
+        return rearranged[n/2];
+    }
     }
     
 
