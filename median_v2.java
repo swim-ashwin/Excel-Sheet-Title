@@ -1,65 +1,93 @@
 public class median_v2 {
     public static void main(String[] args) {
-        int[] arr1 = {};
-        int[] arr2 = {};
-        int[] mergedArray = merge(arr1, arr2);
-
-        if (mergedArray.length == 0) {
-            System.out.println("Array is empty");
-            return;
-        }
-
-        for (int i = 0; i < mergedArray.length; i++) {
-            System.out.print(mergedArray[i] + " ");
-        }
-
-        int[] result = sort(mergedArray);
-        double median = findMedian(result);
-        System.out.print("\n" + "Median is: ");
-        System.out.println(median);
-
+        int[] arr1 = {1, 2, 3};
+        int[] arr2 = {4, 5, 6};
+        double median = findMedian(arr1, arr2);
+        System.out.println("Median of the merged array is: " + median);
     }
 
-    public static int[] merge(int[] arr1, int[] arr2) {
-        if (arr1 == null || arr1.length == 0) {
-            return arr2;
-        }
-        if (arr2 == null || arr2.length == 0) {
-            return arr1;
-        }
+    // public static int[] merge(int[] arr1, int[] arr2) {
+    //     if (arr1 == null || arr1.length == 0) {
+    //         return arr2;
+    //     }
+    //     if (arr2 == null || arr2.length == 0) {
+    //         return arr1;
+    //     }
 
-        int aLength = arr1.length;
-        int bLength = arr2.length;
-        int totalLength = aLength + bLength;
+    //     int aLength = arr1.length;
+    //     int bLength = arr2.length;
+    //     int totalLength = aLength + bLength;
 
-        int[] c = new int[totalLength];
-        for (int i = 0; i < aLength; i++) {
-            c[i] = arr1[i];
-        }
-        for (int i = 0; i < bLength; i++) {
-            c[aLength + i] = arr2[i];
-        }
+    //     int[] c = new int[totalLength];
+    //     for (int i = 0; i < aLength; i++) {
+    //         c[i] = arr1[i];
+    //     }
+    //     for (int i = 0; i < bLength; i++) {
+    //         c[aLength + i] = arr2[i];
+    //     }
 
-        return c;
-    }
+    //     return c;
+    // }
 
-    public static int[] sort(int[] mergedArray) {
-        if (mergedArray.length > 0) {
-            for (int i = 0; i < mergedArray.length - 1; i++) {
-                for (int j = i + 1; j < mergedArray.length; j++) {
-                    if (mergedArray[j] < mergedArray[i]) {
-                        int temp = mergedArray[i];
-                        mergedArray[i] = mergedArray[j];
-                        mergedArray[j] = temp;
-                    }
-                }
+    // public static int[] sort(int[] mergedArray) {
+    //     if (mergedArray.length > 0) {
+    //         for (int i = 0; i < mergedArray.length - 1; i++) {
+    //             for (int j = i + 1; j < mergedArray.length; j++) {
+    //                 if (mergedArray[j] < mergedArray[i]) {
+    //                     int temp = mergedArray[i];
+    //                     mergedArray[i] = mergedArray[j];
+    //                     mergedArray[j] = temp;
+    //                 }
+    //             }
+    //         }
+    //         return mergedArray;
+    //     } else {
+    //         System.out.print("Array is empty");
+    //         return mergedArray;
+    //     }
+    // }
+
+    public static double findMedian(int[] arr1, int[] arr2) {
+        int a = arr1.length;
+        int b = arr2.length;
+    
+        int[] mergedArray = new int[a + b];
+    
+        int i = 0;
+        int j = 0;
+
+        for (int k = 0; k < mergedArray.length; k++) {
+            if (i == a) {
+                mergedArray[k] = arr2[j];
+                j++;
             }
-            return mergedArray;
-        } else {
-            System.out.print("Array is empty");
-            return mergedArray;
+            else if (j == b) {
+                mergedArray[k] = arr1[i];
+                i++;
+            }
+            else if (arr1[i] < arr2[j]) {
+                mergedArray[k] = arr1[i];
+                i++;
+            } else {
+                mergedArray[k] = arr2[j];
+                j++;
+            }
         }
+
+        double median;
+        if ((a + b) % 2 == 0) {
+            int middle1 = (a + b) / 2 - 1;
+            int middle2 = (a + b) / 2;
+            median = (mergedArray[middle1] + mergedArray[middle2]) / 2.0;
+        } else {
+            int middle = (a + b) / 2;
+            median = mergedArray[middle];
+        }
+
+        return median;
     }
+    
+    
 
     public static double findMedian(int[] rearranged) {
         int n = rearranged.length;
