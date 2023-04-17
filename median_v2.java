@@ -2,7 +2,7 @@ public class median_v2 {
     public static void main(String[] args) {
         int[] arr1 = {1, 2, 3};
         int[] arr2 = {4, 5, 6};
-        double median = findMedian(arr1, arr2);
+        double[] median = mergeAndSort(arr1, arr2);
         System.out.println("Median of the merged array is: " + median);
     }
 
@@ -47,45 +47,81 @@ public class median_v2 {
     //     }
     // }
 
-    public static double findMedian(int[] arr1, int[] arr2) {
-        int a = arr1.length;
-        int b = arr2.length;
+    // public static double findMedian(int[] arr1, int[] arr2) {
+    //     int a = arr1.length;
+    //     int b = arr2.length;
     
-        int[] mergedArray = new int[a + b];
+    //     int[] mergedArray = new int[a + b];
     
-        int i = 0;
-        int j = 0;
+    //     int i = 0;
+    //     int j = 0;
 
-        for (int k = 0; k < mergedArray.length; k++) {
-            if (i == a) {
-                mergedArray[k] = arr2[j];
-                j++;
-            }
-            else if (j == b) {
-                mergedArray[k] = arr1[i];
-                i++;
-            }
-            else if (arr1[i] < arr2[j]) {
-                mergedArray[k] = arr1[i];
-                i++;
+    //     for (int k = 0; k < mergedArray.length; k++) {
+    //         if (i == a) {
+    //             mergedArray[k] = arr2[j];
+    //             j++;
+    //         }
+    //         else if (j == b) {
+    //             mergedArray[k] = arr1[i];
+    //             i++;
+    //         }
+    //         else if (arr1[i] < arr2[j]) {
+    //             mergedArray[k] = arr1[i];
+    //             i++;
+    //         } else {
+    //             mergedArray[k] = arr2[j];
+    //             j++;
+    //         }
+    //     }
+
+    //     double median;
+    //     if ((a + b) % 2 == 0) {
+    //         int middle1 = (a + b) / 2 - 1;
+    //         int middle2 = (a + b) / 2;
+    //         median = (mergedArray[middle1] + mergedArray[middle2]) / 2.0;
+    //     } else {
+    //         int middle = (a + b) / 2;
+    //         median = mergedArray[middle];
+    //     }
+
+    //     return median;
+    // }
+
+    public static double[] mergeAndSort(int[] arr1, int[] arr2) {
+        double[] mergedArr = new double[arr1.length + arr2.length];
+        int i = 0, j = 0, k = 0;
+    
+        for (; i < arr1.length && j < arr2.length; k++) {
+            if (arr1[i] < arr2[j]) {
+                mergedArr[k] = arr1[i++];
             } else {
-                mergedArray[k] = arr2[j];
-                j++;
+                mergedArr[k] = arr2[j++];
             }
         }
-
-        double median;
-        if ((a + b) % 2 == 0) {
-            int middle1 = (a + b) / 2 - 1;
-            int middle2 = (a + b) / 2;
-            median = (mergedArray[middle1] + mergedArray[middle2]) / 2.0;
-        } else {
-            int middle = (a + b) / 2;
-            median = mergedArray[middle];
+    
+        for (; i < arr1.length; i++, k++) {
+            mergedArr[k] = arr1[i];
+        }
+    
+        for (; j < arr2.length; j++, k++) {
+            mergedArr[k] = arr2[j];
         }
 
-        return median;
+        for (i = 0; i < mergedArr.length - 1; i++) {
+            for (j = i + 1; j < mergedArr.length; j++) {
+                if (mergedArr[i] > mergedArr[j]) {
+                    double temp = mergedArr[i];
+                    mergedArr[i] = mergedArr[j];
+                    mergedArr[j] = temp;
+                }
+            }
+        }
+    
+        return mergedArr;
     }
+    
+
+    
     
     
 
