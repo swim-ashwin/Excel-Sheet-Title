@@ -2,7 +2,8 @@ public class median_v2 {
     public static void main(String[] args) {
         int[] arr1 = {1, 2, 3};
         int[] arr2 = {4, 5, 6};
-        double[] median = mergeAndSort(arr1, arr2);
+        double[] merged = mergeAndSort(arr1, arr2);
+        double median = findMedian(merged);
         System.out.println("Median of the merged array is: " + median);
     }
 
@@ -125,12 +126,12 @@ public class median_v2 {
     
     
 
-    public static double findMedian(int[] rearranged) {
-        int n = rearranged.length;
+    public static double findMedian(double[] merged) {
+        int n = merged.length;
         if (n % 2 == 0) {
-            return (rearranged[n / 2 - 1] + rearranged[n / 2]) / 2.0;
+            return (merged[n / 2 - 1] + merged[n / 2]) / 2.0;
         } else {
-            return rearranged[n / 2];
+            return merged[n / 2];
         }
     }
 }
